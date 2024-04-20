@@ -315,16 +315,12 @@
     let sentence = "A classy blue shirt with long sleeves and slim fit that is suitable for a man for a business convention."
 
         // Begin tokenizer
-    console.log("Printing sentence\n");
-    console.log(sentence);
 
 
     import nlp from 'compromise';
 
     let doc = nlp(sentence);
     let taggedTokens = doc.out('tags');
-    console.log("PRINTING TOKENS")
-    console.log(taggedTokens)
 
     let adjectives = [];
     let names = [];
@@ -375,8 +371,6 @@
 
     console.log("Printing missing fields");
     console.log(getOnlyMissingFields(user_dict));
-    console.log("Printing chosen fields");
-    console.log(getFields(user_dict));
 
     function getExamplesForField(fieldName) {
         if (!fields_names.includes(fieldName)) {
@@ -422,7 +416,7 @@
         return result;
     }
 
-    let prompt1 = "I am a stylist and i want you to help me develping some sketches. Keeping always the same drawing style, generate only the sketch for  a {style} {color} {item} - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine a {size} item, with {fit} fit, that is suitable for a {event}. The item is meant to be worn by a {sex}.";
+    let prompt1 = "I am a stylist and i want you to help me develop some sketches. Keeping always the same drawing style, generate only the sketch for  a {style} {color} {item} - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine a {size} item, with {fit} fit, that is suitable for a {event}. The item is meant to be worn by a {sex}.";
     
     let filledIntro = substituteValues(user_dict, prompt1);
     console.log("Printing filled sentence")
@@ -444,6 +438,7 @@
  */
 
     import OpenAI from "openai";
+	import { createResponseHeaders } from 'openai/core';
     const openai = new OpenAI({ apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
 
 //import.meta.env.VITE_OPENAI_KEY
@@ -476,6 +471,42 @@
     
     console.log("Proposed patterns");
     console.log(completion3.choices[0]);
+
+    let prompt_generate_pattern = "Create a pattern for fabric having the following features '" + completion3.choices[0].message.content + "'.";
+    let proposed_materials = completion2.choices[0].message.content;
+    let description = completion1.choices[0].message.content;
+
+    console.log(prompt_generate_pattern);
+    console.log(proposed_materials);
+    console.log(description);
+    
+    /*********************************************************************************************/
+
+    // const response = await openai.images.generate({
+    //     model: "dall-e-3",
+    //     prompt: filledIntro,
+    //     n: 1,
+    //     size: "1024x1024",
+    // });
+
+    // let generated_sketch_url = response.data[0].url;
+    // console.log(generated_sketch_url);
+
+    
+    // const response_pattern = await openai.images.generate({
+    //     model: "dall-e-3",
+    //     prompt: prompt_generate_pattern,
+    //     n: 3,
+    //     size: "1024x1024",
+    // });
+
+    // let pattern_image1 = response_pattern.data[0].url;
+    // let pattern_image2 = response_pattern.data[1].url;
+    // let pattern_image3 = response_pattern.data[2].url;
+    // console.log(pattern_image1);
+    // console.log(pattern_image2);
+    // console.log(pattern_image3);
+
     }
 
     main(); 
@@ -484,5 +515,6 @@
 </script>
 
 <div>
+
     Ciao
 </div>

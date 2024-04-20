@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@google-cloud/vertexai": "^1.1.0",
 		"compromise": "^14.13.0",
 		"openai": "^4.38.2",
 		"svelte-icons-pack": "^3.1.3"
