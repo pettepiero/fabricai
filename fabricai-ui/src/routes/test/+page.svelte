@@ -557,13 +557,33 @@
     }
     return [];
     }
-    
+
     //Testing the function
     let word_to_test = "slim";
     let alternatives = findAlternatives(word_to_test, dictionary);
     console.log(alternatives)
+    }
+
+    /*******************************************************************
+     * *****************************************************************
+     * ******************************************************************
+    */
+    //GENERATE AN IMAGE FROM A PROMPT (PIPELINE)
+
+    async function image_from_prompt(prompt, n_images){
+        const response = await openai.images.generate({
+            model: "dall-e-3",
+            prompt: prompt,
+            n: n_images,
+            size: "1024x1024",
+        });
+    
+    let generated_sketch_urls = response.data;
+    console.log(generated_sketch_urls);
 
     }
+
+
 
     main(); 
 
