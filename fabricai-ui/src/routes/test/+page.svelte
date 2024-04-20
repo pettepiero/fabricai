@@ -516,6 +516,53 @@
     // console.log(pattern_image2);
     // console.log(pattern_image3);
 
+    /***************************************************************************
+     * ************************************************************************
+     * *************************************************************************/
+    // HIGHLHIGHTS WORDS IN THE DICTIONARY
+
+    function findTokensInLists(inputString, lists) {
+        const tokens = inputString.split(' ');
+        const foundTokens = [];
+
+        tokens.forEach(token => {
+            lists.forEach(list => {
+                if (list.includes(token)) {
+                    foundTokens.push(token);
+                }
+            });
+        });
+
+        return foundTokens;
+    }
+
+    let dictionary = [item_list, size_list, color_list, sex_list, fit_list, style_list, events_list];
+
+    let words_to_highlight = findTokensInLists(sentence, dictionary)
+    console.log("Words to highlight:")
+    console.log(words_to_highlight)
+
+    /******************************************************************************************
+     * *****************************************************************************************
+     * ****************************************************************************************
+    */
+    //      GENERATES 3 ALTERNATIVES FOR A GIVEN WORD
+
+    function findAlternatives(word, dictionary) {
+    for (let list of dictionary) {
+        if (list.includes(word)) {
+            let alternatives = list.filter(item => item !== word);
+            return alternatives.slice(0, 3);
+        }
+    }
+    return [];
+    }
+    
+    //Testing the function
+    let word_to_test = "slim";
+    let alternatives = findAlternatives(word_to_test, dictionary);
+    console.log(alternatives)
+
     }
 
     main(); 
