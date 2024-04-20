@@ -31,6 +31,7 @@
 	"type": "module",
 	"dependencies": {
 		"compromise": "^14.13.0",
+		"openai": "^4.38.2",
 		"svelte-icons-pack": "^3.1.3"
 	}
 }
