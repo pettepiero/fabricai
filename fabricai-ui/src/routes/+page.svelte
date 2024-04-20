@@ -3,6 +3,7 @@
 	import { Icon } from 'svelte-icons-pack';
 	import { IoDice, IoSettingsSharp } from 'svelte-icons-pack/io';
 	import WordSelector from '$lib/components/WordSelector.svelte';
+	import { goto } from '$app/navigation';
 
 	let userInput = '';
 	let parsedInput = [];
@@ -33,6 +34,15 @@
 		// For example, if the word is 'pattern', 'and', etc.
 		return ['skirt', 'yellow', 'blue', 'rough'].includes(word);
 	}
+
+	function goToDetailPage() {
+		// Convert parsedInput to a string
+		const mainText = parsedInput
+			.map((item) => (typeof item === 'string' ? item : item.word))
+			.join('');
+		// Navigate to the detail page with mainText as a query parameter
+		goto(`/detail?prompt=${encodeURIComponent(mainText)}`); // <-- Change this line
+	}
 </script>
 
 <div class="mt-8 px-4 text-center">
@@ -61,9 +71,7 @@
 
 	<!-- Missing elements -->
 	<div class="hidden mt-6 flex-col text-center">
-		<div class="text-sm">
-			You're missing these elements to have a good result!
-		</div>
+		<div class="text-sm">You're missing these elements to have a good result!</div>
 		<div class="mt-2 flex flex-row space-x-1 justify-center">
 			<Button pill>Skirt</Button>
 			<Button pill>Material</Button>
@@ -74,7 +82,6 @@
 	<!-- Submit -->
 	<div class="fixed bottom-4 left-0 w-full flex justify-center pb-4">
 		<div class="flex flex-col px-4 w-full items-center">
-
 			<div class="mt-4 px-8 w-full">
 				<input
 					class="w-full text-lg border-transparent focus:border-transparent focus:ring-0"
@@ -90,11 +97,9 @@
 				</div>
 			</div>
 
-			
-            
-
-			<Button class=" w-52 mt-10 px-8 py-4 uppercase font-bold rounded-2xl" href="/detail"
-				>Craft my idea</Button
+			<Button
+				class=" w-52 mt-10 px-8 py-4 uppercase font-bold rounded-2xl"
+				on:click={goToDetailPage}>Craft my idea</Button
 			>
 		</div>
 	</div>

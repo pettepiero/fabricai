@@ -3,6 +3,10 @@
 	import { Icon } from 'svelte-icons-pack';
 	import { RiFinanceMoneyEuroCircleLine } from 'svelte-icons-pack/ri';
 	import { FiClock } from "svelte-icons-pack/fi";
+
+	export let data;
+
+	console.log(data);
 </script>
 
 <Navigation />
@@ -50,9 +54,7 @@
 		<div class="mt-5 bg-blue-100 px-4 py-6 rounded-3xl">
 			<h2 class="text-lg font-bold">Description</h2>
 			<div class="mt-4">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Error consequuntur modi minima
-				dicta asperiores pariatur, porro id facilis. Explicabo fuga veniam at consequatur quisquam
-				eum voluptatem sunt error exercitationem reprehenderit.
+				{data.description.message.content}
 			</div>
 		</div>
 
