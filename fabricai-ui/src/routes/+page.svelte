@@ -46,7 +46,7 @@
 	</div>
 
 	<!-- Prompting-->
-	<div class="mt-40 px-4">
+	<div class="mt-32 px-4">
 		<!-- Main Text -->
 		<div class="text-2xl font-semibold">
 			{#each parsedInput as item, index (index)}
@@ -59,10 +59,23 @@
 		</div>
 	</div>
 
+	<!-- Missing elements -->
+	<div class="hidden mt-6 flex-col text-center">
+		<div class="text-sm">
+			You're missing these elements to have a good result!
+		</div>
+		<div class="mt-2 flex flex-row space-x-1 justify-center">
+			<Button pill>Skirt</Button>
+			<Button pill>Material</Button>
+			<Button pill>Color</Button>
+		</div>
+	</div>
+
 	<!-- Submit -->
 	<div class="fixed bottom-4 left-0 w-full flex justify-center pb-4">
 		<div class="flex flex-col px-4 w-full items-center">
-			<div class="px-8 mt-8 w-full">
+
+			<div class="mt-4 px-8 w-full">
 				<input
 					class="w-full text-lg border-transparent focus:border-transparent focus:ring-0"
 					bind:value={userInput}
@@ -76,16 +89,8 @@
 					<Button class="rounded-2xl px-3"><Icon color="white" size="1.4em" src={IoDice} /></Button>
 				</div>
 			</div>
-            <div class="mt-4 flex flex-col text-center">
-                <div class="text-sm">
-                    You're missing these elements to have a good result!
-                </div>
-                <div class="mt-2 flex flex-row space-x-1 justify-center">
-                    <Button pill>Skirt</Button>
-                    <Button pill>Material</Button>
-                    <Button pill>Color</Button>
-                </div>
-            </div>
+
+			
             
 
 			<Button class=" w-52 mt-10 px-8 py-4 uppercase font-bold rounded-2xl" href="/detail"
