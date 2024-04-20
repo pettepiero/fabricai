@@ -1,0 +1,39 @@
+Considera queste variabili:
+- item
+- lenght
+- model
+- material (no, voglio che mi generi una lista di materiali dopo)
+- color / pattern
+- event
+- stile
+
+
+## FOR IMAGE GENERATION
+
+#### Works pretty well on ImageFX  -- not on copilot. It does not generate sketches, but final product
+I am a stylist and i want you to help me develping some sketches. Keeping always the same drawing style, generate only the sketch for  a {style} {color} {item} {pattern} - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine a {lenght} {item} , with {model - fit} , that is suitable for a {event}. The {item} is meant to be worn by a {gender}.
+
+EXAMPLE
+I am a stylist and i want you to help me develping some sketches. Keeping always the same drawing style, generate only the sketch for  a classy white jacket - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine a long sleeve jacket , with relaxed fit, that is suitable for a  conference. The jacket is meant to be worn by a woman.
+
+
+## FOR DESCRIPTION GENERATION -- on CHATGPT
+Consider the following text "prompt for image generation". 
+Imagine the final product and give me a description of the item, without mentioning the material, that can be used as a caption for the product. It should be a brief description, with some technical details. The generated text must not include anything apart from the caption, so no title, no bullet points and no fancy adjective. 
+
+
+
+## FOR OBTAINING LIST OF MATERIALS -- on CHATGPT
+Consider the following text "previous prompt". 
+Propose a list of 6 possible materials that are suitable for producing the item and return just the name of the materials, without titles or explanations.
+
+
+## OBTAIN DESCRIPTION OF PATTERNS -- on CHATGPT (do it for 3 times or make it generate three in a row)
+# doing it once is okay, since the model generates different output
+Given this text "prompt for image generation" can you give me a textual description (no bullet point) of a pattern that uses {color} can be used for the fabric of the item?
+The output must be only the description of the pattern, avoid any additional text
+
+## OBTAIN PATTERNS -- on ImageFX
+Create a pattern for fabric having the following features "prompt_pattern1". 
+
+
