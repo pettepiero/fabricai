@@ -2,7 +2,7 @@
 	import { Button } from 'flowbite-svelte';
 	import { Icon } from 'svelte-icons-pack';
 	import { IoDice, IoSettingsSharp } from 'svelte-icons-pack/io';
-    import WordSelector from '$lib/components/WordSelector.svelte';
+	import WordSelector from '$lib/components/WordSelector.svelte';
 </script>
 
 <div class="mt-8 px-4 text-center">
@@ -17,19 +17,13 @@
 
 	<!-- Prompting-->
 	<div class="mt-40 px-4">
-        <!-- Main Text -->
-		<!-- <div class="text-2xl font-semibold">
-			I want a <span class="text-primary-500">skirt</span> with a pattern of
-			<span class="text-primary-500">flowers</span>
+		<!-- Main Text -->
+		<div class="text-2xl font-semibold">
+			I want a <WordSelector /> with a pattern of
+			<WordSelector />
 			and
-			<span class="text-primary-500">butterflies</span>
-		</div> -->
-        <div class="text-2xl font-semibold">
-            I want a <WordSelector /> with a pattern of
-            <WordSelector />
-            and
-            <WordSelector />
-        </div>
+			<WordSelector />
+		</div>
 		<div class="mt-8 space-x-1">
 			<Button class="rounded-2xl px-3"
 				><Icon color="white" size="1.4em" src={IoSettingsSharp} /></Button

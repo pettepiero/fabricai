@@ -1,18 +1,21 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { writable } from 'svelte/store';
+    import { activeWordSelector } from '$lib/activeWordSelector'; // import the store
 
     let word = 'skirt';
     let words = ['skirt', 'dress', 'shirt'];
     let showDropdown = false;
+    let id = Math.random(); // generate a unique id for each WordSelector
 
-    // Create a unique identifier for this instance of the component
-    let id = Math.random().toString(36).substr(2, 9);
-
-    // Create a global store to keep track of the currently open dropdown
-    const openDropdown = writable(null);
+    activeWordSelector.subscribe(value => {
+        // if another WordSelector is active, close this one
+        if (value !== id) {
+            showDropdown = false;
+        }
+    });
 
     function selectWord(event, newWord) {
+        event.stopPropagation(); // Stop event propagation
         word = newWord;
         showDropdown = false;
     }
@@ -21,6 +24,12 @@
         if (event.target.closest('.dropdown') === null) {
             showDropdown = false;
         }
+    }
+
+    function handleClickInside(event) {
+        event.stopPropagation();
+        showDropdown = !showDropdown;
+        activeWordSelector.set(id); // set this WordSelector as the active one
     }
 
     if (typeof window !== 'undefined') {
@@ -32,16 +41,9 @@
             window.removeEventListener('click', handleClickOutside);
         });
     }
-
-    // Subscribe to the store and close this dropdown when another one opens
-    openDropdown.subscribe(value => {
-        if (value !== id) {
-            showDropdown = false;
-        }
-    });
 </script>
 
-<span class="relative cursor-pointer inline-block dropdown" on:click="{() => { showDropdown = !showDropdown; openDropdown.set(id); }}" role="button" tabindex="0" on:keydown="{(event) => { if (event.key === 'Enter') showDropdown = !showDropdown; }}">
+<span class="relative cursor-pointer inline-block dropdown" on:click="{handleClickInside}" role="button" tabindex="0" on:keydown="{(event) => { if (event.key === 'Enter') handleClickInside(event); }}">
     <span class="text-primary-500">{word}</span>
     <div class="{showDropdown ? 'block' : 'hidden'} absolute bg-white shadow rounded mt-1 z-50">
         {#each words as newWord (newWord)}
