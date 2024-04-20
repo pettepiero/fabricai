@@ -47,8 +47,8 @@
         "slim-fit",
         "loose-fit",
         "skinny-fit",
-        "wide-leg",
-        "straight-leg",
+        "long-sleeve",
+        "short-sleeve",
         "bootcut",
         "cropped",
         "oversized",
@@ -59,7 +59,6 @@
         "flowy",
         "baggy",
         "form-fitting",
-        "empire-waist",
     ];
     let color_list = [
         "red",
@@ -116,40 +115,41 @@
         "ms",
         "mr",
     ];
-    let material_list = [
-        "silk",
-        "cotton",
-        "wool",
-        "leather",
-        "linen",
-        "denim",
-        "satin",
-        "velvet",
-        "lace",
-        "polyester",
-        "cashmere",
-        "chiffon",
-        "rayon",
-        "spandex",
-        "suede",
-        "twill",
-        "corduroy",
-        "organza",
-        "tulle",
-        "viscose",
-        "modal",
-        "bamboo",
-        "acrylic",
-        "nylon",
-        "fleece",
-        "fur",
-        "faux leather",
-        "canvas",
-        "satin",
-        "silk-blend",
-    ];
+    // let material_list = [
+    //     "silk",
+    //     "cotton",
+    //     "wool",
+    //     "leather",
+    //     "linen",
+    //     "denim",
+    //     "satin",
+    //     "velvet",
+    //     "lace",
+    //     "polyester",
+    //     "cashmere",
+    //     "chiffon",
+    //     "rayon",
+    //     "spandex",
+    //     "suede",
+    //     "twill",
+    //     "corduroy",
+    //     "organza",
+    //     "tulle",
+    //     "viscose",
+    //     "modal",
+    //     "bamboo",
+    //     "acrylic",
+    //     "nylon",
+    //     "fleece",
+    //     "fur",
+    //     "faux leather",
+    //     "canvas",
+    //     "satin",
+    //     "silk-blend",
+    // ];
     let fit_list = [
-        "loose",
+        "loose-fit",
+        "slim-fit",
         "slim",
         "tight",
         "baggy",
@@ -160,6 +160,8 @@
         "skinny",
         "wide-leg",
         "bell-bottom",
+        "long-sleeve",
+        "short-sleeve",
         "empire",
         "peplum",
         "tailored",
@@ -184,6 +186,7 @@
     ];
     let style_list = [
         "classic",
+        "classy",
         "casual",
         "elegant",
         "bohemian",
@@ -246,45 +249,45 @@
         "fundraiser",
         "party",
     ];
-    let pattern_list = [
-        "stripes",
-        "plaid",
-        "floral",
-        "polka dot",
-        "geometric",
-        "animal print",
-        "tie-dye",
-        "checkered",
-        "houndstooth",
-        "paisley",
-        "tartan",
-        "camouflage",
-        "abstract",
-        "chevron",
-        "gingham",
-        "ikat",
-        "marble",
-        "ombre",
-        "patchwork",
-        "tribal",
-        "zigzag",
-        "argyle",
-        "damask",
-        "brocade",
-        "herringbone",
-        "jacquard",
-        "lace",
-        "mesh",
-        "seersucker",
-    ];
+    // let pattern_list = [
+    //     "stripes",
+    //     "plaid",
+    //     "floral",
+    //     "polka dot",
+    //     "geometric",
+    //     "animal print",
+    //     "tie-dye",
+    //     "checkered",
+    //     "houndstooth",
+    //     "paisley",
+    //     "tartan",
+    //     "camouflage",
+    //     "abstract",
+    //     "chevron",
+    //     "gingham",
+    //     "ikat",
+    //     "marble",
+    //     "ombre",
+    //     "patchwork",
+    //     "tribal",
+    //     "zigzag",
+    //     "argyle",
+    //     "damask",
+    //     "brocade",
+    //     "herringbone",
+    //     "jacquard",
+    //     "lace",
+    //     "mesh",
+    //     "seersucker",
+    // ];
     let fields_names = [
         "item",
         "size",
         "color",
         "sex",
         "fit",
-        "material",
-        "pattern",
+        // "material",
+        // "pattern",
         "event",
         "style",
     ];
@@ -301,15 +304,16 @@
         "color": color_list,
         "sex": sex_list,
         "fit": fit_list,
-        "material": material_list,
-        "pattern": pattern_list,
+        // "material": material_list,
+        // "pattern": pattern_list,
         "event": events_list,
         "style": style_list
     };
 
 
     
-    let sentence = "A long silk dress for a beach party."
+    let sentence = "A classy blue shirt with long sleeves and slim fit that is suitable for a man for a business convention."
+
         // Begin tokenizer
     console.log("Printing sentence\n");
     console.log(sentence);
@@ -319,6 +323,7 @@
 
     let doc = nlp(sentence);
     let taggedTokens = doc.out('tags');
+    console.log("PRINTING TOKENS")
     console.log(taggedTokens)
 
     let adjectives = [];
@@ -389,6 +394,49 @@
         console.log(field + ":", getExamplesForField(field));
     });
     console.log("****************************************")
+    console.log(user_dict)
+
+
+    function fillMissingValues(userDict, missingFields) {
+    missingFields.forEach(field => {
+        if (userDict[field] === "none") {
+            userDict[field] = getExamplesForField(field);
+        }
+    });
+    }
+
+    let missing_fields = getOnlyMissingFields(user_dict);
+    fillMissingValues(user_dict, missing_fields);
+    console.log("Printing after 'fillMissingValues'")
+    console.log(user_dict)
+
+    /*********************************************************************************/
+    function substituteValues(user_dict, intro) {
+        let result = intro;
+        for (let key in user_dict) {
+            let placeholder = `{${key}}`;
+            if (result.includes(placeholder)) {
+                result = result.replace(placeholder, user_dict[key]);
+            }
+        }
+        return result;
+    }
+
+    let prompt1 = "I am a stylist and i want you to help me develping some sketches. Keeping always the same drawing style, generate only the sketch for  a {style} {color} {item} - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine a {size} item, with {fit} fit, that is suitable for a {event}. The item is meant to be worn by a {sex}.";
+    
+    let filledIntro = substituteValues(user_dict, prompt1);
+    console.log("Printing filled sentence")
+    console.log(filledIntro);
+
+
+    let prompt_description = "Consider the following text '" + filledIntro +"'. Imagine the final product and give me a description of the item, without mentioning the material, that can be used as a caption for the product. It should be a brief description, with some technical details. The generated text must not include anything apart from the caption, so no title, no bullet points and no fancy adjective." 
+    let prompt_materials = "Consider the following text: '" + filledIntro + "'.Propose a list of 6 possible materials that are suitable for producing the item and return just the name of the materials, without titles or explanations."
+    let prompt2 = "Given this text '" + filledIntro + "', can you give me a textual description (no bullet point) of a pattern that uses {color} and can be used for the fabric of the item\? The output must be only the description of the pattern, avoid any additional text"
+    let prompt_patterns = substituteValues(user_dict, prompt2)
+
+    console.log("PRINTING PROMPT PATTERNS");
+    console.log(prompt_patterns);
+
 
 /********************************************************************************
  * ********************* GPT ****************************************************
@@ -400,19 +448,34 @@
 
 //import.meta.env.VITE_OPENAI_KEY
 
-    let message = 
-    `I would like to know if the following sentence is talking about clothes:
-    {sentence}\n
-    Here is an example so that you know the format I would like the reply to be in:\n
-    My sentence: "The long dress she wore at the show.\n"
-    Your reply: "Yes"`
     async function main() {
-    const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: message }],
+    
+    //Initial conversation
+    const completion1 = await openai.chat.completions.create({
+        messages: [{ role: "system", content: prompt_description }],
         model: "gpt-3.5-turbo",
     });
+    
+    console.log("Description of the item");
+    console.log(completion1.choices[0]);
 
-    console.log(completion.choices[0]);
+    //Materials conversation
+    const completion2 = await openai.chat.completions.create({
+        messages: [{ role: "system", content: prompt_materials }],
+        model: "gpt-3.5-turbo",
+    });
+    
+    console.log("Proposed materials");
+    console.log(completion2.choices[0]);
+
+    //Pattern conversation
+    const completion3 = await openai.chat.completions.create({
+        messages: [{ role: "system", content: prompt_patterns }],
+        model: "gpt-3.5-turbo",
+    });
+    
+    console.log("Proposed patterns");
+    console.log(completion3.choices[0]);
     }
 
     main(); 
