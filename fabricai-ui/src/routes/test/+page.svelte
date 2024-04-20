@@ -310,12 +310,7 @@
         "style": style_list
     };
 
-
-    
     let sentence = "A classy blue shirt with long sleeves and slim fit that is suitable for a man for a business convention."
-
-        // Begin tokenizer
-
 
     import nlp from 'compromise';
 
@@ -475,6 +470,20 @@
     let prompt_generate_pattern = "Create a pattern for fabric having the following features '" + completion3.choices[0].message.content + "'.";
     let proposed_materials = completion2.choices[0].message.content;
     let description = completion1.choices[0].message.content;
+
+    //prompt to get title
+    let title_prompt = "Given the following description: '" + description + "', create a short title for the described item\n.";
+
+//Title conversation
+    const completion4 = await openai.chat.completions.create({
+        messages: [{ role: "system", content: title_prompt }],
+        model: "gpt-3.5-turbo",
+    });
+    
+    console.log("Proposed title");
+    console.log(completion4.choices[0]);
+    let title = completion4.choices[0].message.content;
+    console.log(title)
 
     console.log(prompt_generate_pattern);
     console.log(proposed_materials);
