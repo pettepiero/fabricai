@@ -323,7 +323,8 @@
             adjectives.push(token);
         }
         if (taggedTokens[0][token].includes("Noun")) {
-            names.push(token);
+            names.push(token);    console.log(adjectives)
+
         }
     }
 
@@ -336,6 +337,8 @@
             }
         }
     }
+
+    console.log(adjectives)
 
     getUserChoices(adjectives.concat(names), user_dict);
     console.log("Printing user_dict\n")
@@ -385,11 +388,11 @@
 
 
     function fillMissingValues(userDict, missingFields) {
-    missingFields.forEach(field => {
-        if (userDict[field] === "none") {
-            userDict[field] = getExamplesForField(field);
-        }
-    });
+        missingFields.forEach(field => {
+            if (userDict[field] === "none") {
+                userDict[field] = getExamplesForField(field);
+            }
+        });
     }
 
     let missing_fields = getOnlyMissingFields(user_dict);
@@ -489,30 +492,30 @@
     
     /*********************************************************************************************/
 
-    // const response = await openai.images.generate({
-    //     model: "dall-e-3",
-    //     prompt: filledIntro,
-    //     n: 1,
-    //     size: "1024x1024",
-    // });
+    const response = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: filledIntro,
+        n: 1,
+        size: "1024x1024",
+    });
 
-    // let generated_sketch_url = response.data[0].url;
-    // console.log(generated_sketch_url);
+    let generated_sketch_url = response.data[0].url;
+    console.log(generated_sketch_url);
 
     
-    // const response_pattern = await openai.images.generate({
-    //     model: "dall-e-3",
-    //     prompt: prompt_generate_pattern,
-    //     n: 3,
-    //     size: "1024x1024",
-    // });
+    const response_pattern = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: prompt_generate_pattern,
+        n: 3,
+        size: "1024x1024",
+    });
 
-    // let pattern_image1 = response_pattern.data[0].url;
-    // let pattern_image2 = response_pattern.data[1].url;
-    // let pattern_image3 = response_pattern.data[2].url;
-    // console.log(pattern_image1);
-    // console.log(pattern_image2);
-    // console.log(pattern_image3);
+    let pattern_image1 = response_pattern.data[0].url;
+    let pattern_image2 = response_pattern.data[1].url;
+    let pattern_image3 = response_pattern.data[2].url;
+    console.log(pattern_image1);
+    console.log(pattern_image2);
+    console.log(pattern_image3);
 
     /***************************************************************************
      * ************************************************************************
