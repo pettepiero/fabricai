@@ -37,3 +37,10 @@ The output must be only the description of the pattern, avoid any additional tex
 Create a pattern for fabric having the following features "prompt_pattern1". 
 
 
+
+#### ESEMPI FRASI COMPLETE
+I want a sporty yellow t-shirt. It should be long sleeve and have a regular fit. It should be designed for woman for a sport competion. 
+Create a classy blue skirt with floor lenght and tight fit. It should be elegant and suitable for a girl birthday party. 
+I want a a casual grey blazer for a men who has an informal business meeting. The blazer must have long sleeve and a regular fit. 
+I want a chic red dress for a woman who has an important gala night. The dress must have an a-line structure and floor lenght. 
+
