@@ -30,36 +30,36 @@
         "sneakers",
         "flats",
     ];
-    let size_list = [
-        "short",
-        "long",
-        "medium",
-        "mini",
-        "maxi",
-        "midi",
-        "knee-length",
-        "ankle-length",
-        "floor-length",
-        "petite",
-        "tall",
-        "regular",
-        "plus-size",
-        "slim-fit",
-        "loose-fit",
-        "skinny-fit",
-        "long-sleeve",
-        "short-sleeve",
-        "bootcut",
-        "cropped",
-        "oversized",
-        "fitted",
-        "tailored",
-        "athletic",
-        "relaxed",
-        "flowy",
-        "baggy",
-        "form-fitting",
-    ];
+    // let size_list = [
+    //     "short",
+    //     "long",
+    //     "medium",
+    //     "mini",
+    //     "maxi",
+    //     "midi",
+    //     "knee-length",
+    //     "ankle-length",
+    //     "floor-length",
+    //     "petite",
+    //     "tall",
+    //     "regular",
+    //     "plus-size",
+    //     "slim-fit",
+    //     "loose-fit",
+    //     "skinny-fit",
+    //     "long-sleeve",
+    //     "short-sleeve",
+    //     "bootcut",
+    //     "cropped",
+    //     "oversized",
+    //     "fitted",
+    //     "tailored",
+    //     "athletic",
+    //     "relaxed",
+    //     "flowy",
+    //     "baggy",
+    //     "form-fitting",
+    // ];
     let color_list = [
         "red",
         "blue",
@@ -93,6 +93,7 @@
         "indigo",
     ];
     let sex_list = [
+        "men",
         "man",
         "woman",
         "boy",
@@ -102,14 +103,6 @@
         "gentleman",
         "lady",
         "guy",
-        "gal",
-        "gent",
-        "lass",
-        "dude",
-        "chick",
-        "fellow",
-        "lassie",
-        "lad",
         "miss",
         "mister",
         "ms",
@@ -219,6 +212,8 @@
         "nautical",
     ];
     let events_list = [
+        "sport",
+        "competition",
         "formal",
         "casual",
         "business",
@@ -282,7 +277,7 @@
     // ];
     let fields_names = [
         "item",
-        "size",
+        // "size",
         "color",
         "sex",
         "fit",
@@ -300,7 +295,7 @@
 
     let sampling_dict = {
         "item": item_list,
-        "size": size_list,
+        // "size": size_list,
         "color": color_list,
         "sex": sex_list,
         "fit": fit_list,
@@ -310,7 +305,10 @@
         "style": style_list
     };
 
-    let sentence = "A classy blue shirt with long sleeves and slim fit that is suitable for a man for a business convention."
+    //let sentence = "A classy blue shirt with long sleeves and slim fit that is suitable for a man for a business convention."
+    let sentence = "I want a chic red dress for a woman who has an important gala night. The dress must have an a-line structure and floor lenght."
+    console.log("Printing sentence")
+    console.log(sentence)
 
     import nlp from 'compromise';
 
@@ -411,7 +409,7 @@
         return result;
     }
 
-    let prompt1 = "I am a stylist and i want you to help me develop some sketches. Keeping always the same drawing style, generate only the sketch for  a {style} {color} {item} - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine a {size} item, with {fit} fit, that is suitable for a {event}. The item is meant to be worn by a {sex}.";
+    let prompt1 = "I am a stylist and i want you to help me develop some sketches. Keeping always the same drawing style, generate only the sketch for  a {style} {color} {item} - do not generate the final product, just a draft on a neutral background that seems hand drawn and be sure that there is only one sketch per page. Imagine an item with {fit} fit, that is suitable for a {event}. The item is meant to be worn by a {sex}.";
     
     let filledIntro = substituteValues(user_dict, prompt1);
     console.log("Printing filled sentence")
@@ -536,7 +534,9 @@
         return foundTokens;
     }
 
-    let dictionary = [item_list, size_list, color_list, sex_list, fit_list, style_list, events_list];
+    let dictionary = [item_list, color_list, sex_list, fit_list, style_list, events_list];
+    // let dictionary = [item_list, size_list, color_list, sex_list, fit_list, style_list, events_list];
+
 
     let words_to_highlight = findTokensInLists(sentence, dictionary)
     console.log("Words to highlight:")
